@@ -27,7 +27,7 @@ jobs:
 
       - id: 'generateSecret'
         name: Generate Secret
-        uses: timowang1991/github-actions-envfile-to-k8s-configmap-or-secret@v9
+        uses: timowang1991/github-actions-envfile-to-k8s-configmap-or-secret@v1
         with:
           k8sName: 'test-configmap'
           k8sKind: 'Secret'
