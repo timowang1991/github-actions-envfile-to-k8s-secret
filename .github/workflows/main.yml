@@ -35,4 +35,4 @@ jobs:
           base64EncodedEnvString: ${{ secrets.ENV }}
       
       - name: Check Secret
-        run: echo ${{ steps.generateSecret.outputs.k8sObject }}
+        run: echo "${{ steps.generateSecret.outputs.k8sObject }}"
