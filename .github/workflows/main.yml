@@ -21,7 +21,17 @@ jobs:
           k8sName: 'test-configmap'
           k8sKind: 'ConfigMap'
           base64EncodedEnvString: ${{ secrets.ENV }}
-        run: echo ${{ steps.generateConfigMap.outputs.k8sObject }}
       
       - name: Check ConfigMap
         run: echo ${{ steps.generateConfigMap.outputs.k8sObject }}
+
+      - id: 'generateSecret'
+        name: Generate Secret
+        uses: timowang1991/github-actions-envfile-to-k8s-configmap-or-secret@v9
+        with:
+          k8sName: 'test-configmap'
+          k8sKind: 'Secret'
+          base64EncodedEnvString: ${{ secrets.ENV }}
+      
+      - name: Check Secret
+        run: echo ${{ steps.generateSecret.outputs.k8sObject }}
