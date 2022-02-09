@@ -14,8 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
-      - id: 'testConfigMap'
-        name: Test ConfigMap
+      - id: 'generateConfigMap'
+        name: Generate ConfigMap
         uses: timowang1991/github-actions-envfile-to-k8s-configmap-or-secret@v2
         with:
           k8sName: 'test-configmap'
@@ -23,4 +23,4 @@ jobs:
           base64EncodedEnvString: ${{ secrets.ENV }}
       
       - name: Check ConfigMap
-        run: echo ${{ steps.testConfigMap.outputs.k8sObject }}
+        run: echo ${{ steps.generateConfigMap.outputs.k8sObject }}
