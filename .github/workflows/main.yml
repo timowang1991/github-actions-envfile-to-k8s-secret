@@ -23,7 +23,9 @@ jobs:
           base64EncodedEnvString: ${{ secrets.ENV }}
       
       - name: Check ConfigMap
-        run: echo ${{ steps.generateConfigMap.outputs.k8sObject }}
+        run: |
+          echo ${{ steps.generateConfigMap.outputs.k8sObject }} > .env
+          cat .env
 
       - id: 'generateSecret'
         name: Generate Secret
