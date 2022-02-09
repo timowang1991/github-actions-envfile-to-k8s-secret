@@ -24,8 +24,7 @@ jobs:
       
       - name: Check ConfigMap
         run: |
-          echo ${{ steps.generateConfigMap.outputs.k8sObject }} > .env
-          cat .env
+          echo "${{ steps.generateConfigMap.outputs.k8sObject }}"
 
       - id: 'generateSecret'
         name: Generate Secret
