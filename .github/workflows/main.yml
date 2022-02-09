@@ -3,7 +3,7 @@ name: Test
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   test:
@@ -14,13 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
-      - id: 'test-configmap'
+      - id: 'testConfigMap'
         name: Test ConfigMap
         uses: timowang1991/github-actions-envfile-to-k8s-configmap-or-secret@v1
         with:
           name: 'test-configmap'
-          kind: 'ConfigMap'
-          base64EncodedEnvString: ${{ secret.ENV }}
+          k8sKind: 'ConfigMap'
+          base64EncodedEnvString: ${{ secrets.ENV }}
       
       - name: Check ConfigMap
-        run: echo ${{ 'test-configmap'.output.k8sObject }}
+        run: echo ${{ steps.testConfigMap.outputs.k8sObject }}
