@@ -14,6 +14,7 @@ parser.add_argument('--output', metavar='.yaml', nargs='?', type=argparse.FileTy
 args = parser.parse_args()
 
 config = configparser.ConfigParser()
+config.optionxform = str
 config.read_file(itertools.chain(['[global]'], args.env), source="env")
 secrets = config.items('global')
 args.env.close()
