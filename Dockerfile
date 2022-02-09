@@ -2,8 +2,10 @@ FROM python:3.8-alpine
 
 RUN apk add git
 
-COPY ./entrypoint.sh /entrypoint.sh
+WORKDIR /opt
 
-COPY ./main.py /main.py
+COPY ./entrypoint.sh /opt/entrypoint.sh
 
-CMD ["/entrypoint.sh"]
+COPY ./main.py /opt/main.py
+
+CMD ["entrypoint.sh"]
