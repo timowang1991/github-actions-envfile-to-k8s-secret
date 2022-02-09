@@ -6,4 +6,4 @@ COPY ./entrypoint.sh /opt/entrypoint.sh
 
 COPY ./main.py /opt/main.py
 
-CMD ["entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
