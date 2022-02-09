@@ -1,13 +1,14 @@
-#!/bin/sh
+#!/bin/sh -l
+
+echo "1:$1"
+echo "2:$2"
+echo "3:$3"
+
 k8sName=$1
 k8sKind=$2
 base64EncodedEnvString=$3
 
 base64DecodedEnvString=$(echo ${base64EncodedEnvString} | base64 -d)
-
-echo "1:$1"
-echo "2:$2"
-echo "3:$3"
 
 echo "k8sName:$k8sName"
 echo "k8sKind:$k8sKind"
