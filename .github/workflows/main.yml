@@ -21,6 +21,7 @@ jobs:
           k8sName: 'test-configmap'
           k8sKind: 'ConfigMap'
           base64EncodedEnvString: ${{ secrets.ENV }}
+        run: echo ${{ steps.generateConfigMap.outputs.k8sObject }}
       
       - name: Check ConfigMap
         run: echo ${{ steps.generateConfigMap.outputs.k8sObject }}
