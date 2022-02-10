@@ -25,6 +25,9 @@ jobs:
       - name: Check ConfigMap
         run: |
           echo "${{ steps.generateConfigMap.outputs.k8sObject }}"
+          echo "${{ steps.generateConfigMap.outputs.k8sObject }}" > configmap.yaml
+          ls
+          cat configmap.yaml
 
       - id: 'generateSecret'
         name: Generate Secret
@@ -35,4 +38,8 @@ jobs:
           base64EncodedEnvString: ${{ secrets.ENV }}
       
       - name: Check Secret
-        run: echo "${{ steps.generateSecret.outputs.k8sObject }}"
+        run: |
+          echo "${{ steps.generateSecret.outputs.k8sObject }}"
+          echo "${{ steps.generateSecret.outputs.k8sObject }}" > secret.yaml
+          ls
+          cat secret.yaml
