@@ -12,4 +12,5 @@ result="${result//'%'/'%25'}"
 result="${result//$'\n'/'%0A'}"
 result="${result//$'\r'/'%0D'}"
 
+echo "::add-mask::${result}"
 echo "::set-output name=k8sObject::${result}"
