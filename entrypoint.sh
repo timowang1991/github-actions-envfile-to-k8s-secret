@@ -4,9 +4,9 @@ k8sName=$1
 k8sNamespace=$2
 base64EncodedEnvString=$3
 
-echo ${base64EncodedEnvString} | base64 -d > .env
+echo ${base64EncodedEnvString} | base64 -d > /tmp/.env
 
-result=$(python main.py --name ${k8sName} --namespace ${k8sNamespace} --env .env)
+result=$(python /opt/main.py --name ${k8sName} --namespace ${k8sNamespace} --env /tmp/.env)
 
 result="${result//'%'/'%25'}"
 result="${result//$'\n'/'%0A'}"
