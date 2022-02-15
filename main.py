@@ -7,7 +7,7 @@ from string import Template
 
 parser = argparse.ArgumentParser(description='Convert environment files to kubernetes ConfigMap/Secret')
 parser.add_argument('--name', metavar='name', nargs='?', type=str, default='my-secrets', help='Name of the configmap/secret store')
-parser.add_argument('--kind', metavar='kind', nargs='?', type=str, default='ConfigMap', help='K8s kind: <ConfigMap | Secret>')
+parser.add_argument('--namespace', metavar='namespace', nargs='?', type=str, default='default', help='K8s namespace')
 parser.add_argument('--env', metavar='.env', nargs='?', type=argparse.FileType('r'), default=sys.stdin, help='Environment input file, stdin by default')
 parser.add_argument('--output', metavar='.yaml', nargs='?', type=argparse.FileType('w'), default=sys.stdout, help='Output file, stdout by default')
 
@@ -34,13 +34,14 @@ encodedSecrets = ['  {0}: {1}'.format(
 ) for secret in secrets]
 
 yamlTemplate = Template("""apiVersion: v1
-kind: $kind
+kind: Secret
 metadata:
   name: $name
+  namespace: $namespace
 type: Opaque
 data:
 $encodedSecrets""")
-yamlOutput = yamlTemplate.substitute(name=args.name, kind=args.kind, encodedSecrets='\n'.join(encodedSecrets))
+yamlOutput = yamlTemplate.substitute(name=args.name, namespace=args.namespace, encodedSecrets='\n'.join(encodedSecrets))
 
 args.output.write(yamlOutput)
 args.output.close()

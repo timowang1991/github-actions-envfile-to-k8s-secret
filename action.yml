@@ -1,13 +1,13 @@
-name: 'Env File to K8s ConfigMap or Secret'
-description: 'Converts your .env file (base64 encoded already) to k8s ConfigMap or Secret file on the fly'
+name: 'Env File to K8s Secret'
+description: 'Converts your .env file (base64 encoded already) to k8s Secret file on the fly'
 inputs:
   k8sName:
-    description: 'Name of the ConfigMap/Secret object'
+    description: 'Name of the secret object'
     required: true
-  k8sKind:
-    description: '[ConfigMap | Secret]'
+  k8sNamespace:
+    description: 'Namespace of the secret object'
     required: false
-    default: 'ConfigMap'
+    default: 'default'
   base64EncodedEnvString:
     description: 'Env file in base64 encoded string format'
     required: true
@@ -19,5 +19,5 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.k8sName }}
-    - ${{ inputs.k8sKind }}
+    - ${{ inputs.k8sNamespace }}
     - ${{ inputs.base64EncodedEnvString }}
