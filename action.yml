@@ -16,7 +16,7 @@ outputs:
     description: 'created k8s object'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://timowang1991/github-actions-envfile-to-k8s-secret'
   args:
     - ${{ inputs.k8sName }}
     - ${{ inputs.k8sNamespace }}
